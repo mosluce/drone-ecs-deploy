@@ -39,11 +39,6 @@ if [ ! -z ${PLUGIN_AWS_SECRET_ACCESS_KEY} ]; then
   AWS_SECRET_ACCESS_KEY=$PLUGIN_AWS_SECRET_ACCESS_KEY
 fi
 
-if [ $PLUGIN_DEBUG = "true" ]; then
-  echo "$PLUGIN_AWS_REGION / $PLUGIN_AWS_REGION / $PLUGIN_AWS_ACCESS_KEY_ID / $PLUGIN_AWS_SECRET_ACCESS_KEY / $AWS_ACCESS_KEY_ID / $AWS_SECRET_ACCESS_KEY"
-  exit 0;
-fi
-
 if [ ! -z ${PLUGIN_IMAGE_TAG} ]; then
   # ecs-deploy base container puts the script in the fs root :(
   /ecs-deploy --region ${PLUGIN_AWS_REGION} --cluster ${PLUGIN_CLUSTER} --tag-only ${PLUGIN_IMAGE_TAG} --image ignore --service-name ${PLUGIN_SERVICE} --timeout ${PLUGIN_TIMEOUT} --min ${PLUGIN_MIN} --max ${PLUGIN_MAX} --aws-access-key ${PLUGIN_AWS_ACCESS_KEY_ID} --aws-secret-key ${PLUGIN_AWS_SECRET_ACCESS_KEY} 
